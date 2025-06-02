@@ -35,10 +35,20 @@ class DiceParser {
 
             for (let j = 0; j < parts.length; j++) {
                 const part = parts[j].trim();
-                const num = parseInt(part, 10);
 
-                if (isNaN(num)) {
-                    errors.push(`Dice ${i + 1}, face ${j + 1}: "${part}" is not a valid integer`);
+                // First check if it's a valid number using parseFloat
+                const floatNum = parseFloat(part);
+
+                if (isNaN(floatNum)) {
+                    errors.push(`Dice ${i + 1}, face ${j + 1}: "${part}" is not a valid number`);
+                    continue;
+                }
+
+                // Then check if it's an integer by comparing parseFloat and parseInt
+                const intNum = parseInt(part, 10);
+
+                if (floatNum !== intNum) {
+                    errors.push(`Dice ${i + 1}, face ${j + 1}: "${part}" is not an integer`);
                 }
             }
         }

@@ -5,16 +5,17 @@ class Dice {
             throw new Error('Dice faces must be a non-empty array');
         }
 
-        //Checking if dice has 6 faces or not
-        if(!Array.isArray(faces)|| faces.length>6||faces.length < 6){
-            throw new Error('Incorrect number of faces. Dice must have 6 faces only.');
-        }
 
-        // Check if all faces are whole numbers
+        // Check if all faces are whole numbers first
         for (let i = 0; i < faces.length; i++) {
             if (!Number.isInteger(faces[i])) {
                 throw new Error('All dice faces must be integers');
             }
+        }
+
+        // Then check if dice has exactly 6 faces
+        if(faces.length !== 6){
+            throw new Error('Incorrect number of faces. Dice must have 6 faces only.');
         }
 
         // Store a copy of the faces array
